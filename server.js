@@ -10,5 +10,11 @@ app.get("/", (req, res) => {
   res.end();
 });
 
+app.get("/test", (req, res) => {
+  res.write("test");
+  res.end();
+});
+
+
 console.log(`Listening on port ${PORT}`);
 app.listen(PORT);
