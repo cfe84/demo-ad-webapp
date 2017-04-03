@@ -5,16 +5,10 @@ const PORT = process.env.PORT || 8080;
 var app = new express();
 
 app.get("/", (req, res) => {
-  res.write(`Principal id: ${req.get("X-MS-CLIENT-PRINCIPAL-NAME")}\n`);
-  res.write(`Principal name: ${req.get("X-MS-CLIENT-PRINCIPAL-ID")}`);
+  for (var name in req.headers)
+    res.write(`${name}: ${req.headers[name]}\n`);
   res.end();
 });
-
-app.get("/test", (req, res) => {
-  res.write("test");
-  res.end();
-});
-
 
 console.log(`Listening on port ${PORT}`);
 app.listen(PORT);
