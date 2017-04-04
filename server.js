@@ -9,13 +9,14 @@ app.get("/", (req, res) => {
   for (var name in req.headers)
     res.write(`${name}: ${req.headers[name]}\n`);
   var token;
-  if (token = req.headers["x-ms-token-aad-id-token"])
+  token = req.headers["x-ms-token-aad-id-token"];
+  if (token)
   {
     var token = jwtDecode(token);
     if (token.groups)
-      token.groups.forEach(group => console.log(`You are part of group ${group}`));
+      token.groups.forEach(group => res.write(`You are part of group ${group}\n`));
     if (token.roles)
-      token.roles.forEach(role => console.log(`You have role ${role}`));
+      token.roles.forEach(role => res.write(`You have role ${role}\n`));
   }
   res.end();
 });
